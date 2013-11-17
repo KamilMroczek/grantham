@@ -13,7 +13,16 @@ gem 'coffee-rails', '~> 4.0.0' # Use CoffeeScript for .js.coffee assets and view
 gem 'jquery-rails' # Use jquery as the JavaScript library
 gem 'turbolinks' # Turbolinks makes following links in your web application faster.
 gem 'jbuilder', '~> 1.2' # Build JSON APIs with ease.
+gem 'awesome_print'
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+                              :github => 'anjlab/bootstrap-rails'
+gem 'anjlab-widgets'
 
+gem 'paperclip'
+gem 'aws-sdk'
+
+gem 'haml'
+gem 'haml-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 # Use ActiveModel has_secure_password

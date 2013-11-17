@@ -1,0 +1,82 @@
+= stylesheet_link_tag    "projects/create-animate", media: "all", "data-turbolinks-track" => true
+= stylesheet_link_tag    "projects/create-flow", media: "all", "data-turbolinks-track" => true
+= stylesheet_link_tag    "projects/select2", media: "all", "data-turbolinks-track" => true
+
+.container
+  .row
+    .col-md-4
+      = render 'create_project_progress_panel'
+    
+    .col-md-8
+      = form_for @project, :html => { :class => 'form-horizontal', :multipart => true }, :url => projects_path do |f|
+        .create1-panel
+          .panel.panel-default.signup-animate-left
+            .panel-heading
+              %h3.panel-title Create Project
+            .panel-body
+              .form-horizontal
+                %p Tell us a bit about the project to get you started.    
+                .form-group
+                  = f.label :title, 'Project Title', class: 'col-lg-3 control-label'
+                  .col-lg-8
+                    = f.text_field :title, class: 'form-control', placeholder: "What shall we call this project?"
+                .form-group
+                  = f.label :logline, 'Log Line', class: 'col-lg-3 control-label'
+                  .col-lg-8
+                    = f.text_area :logline, class: 'form-control', placeholder: 'Capture our attention in 140 characters.', rows: 3
+                .form-group
+                  = f.label :description, 'Description', class: 'col-lg-3 control-label'
+                  .col-lg-8
+                    = f.text_area :description, class: 'form-control', placeholder: "Give us a bit more meat.", rows: 5
+          %a.btn.btn-outline.btn-large.pull-right.btn-create1-next
+            Next
+            %span.glyphicon.glyphicon-arrow-right
+        
+        .create2-panel.hide
+          .panel.panel-default.signup-animate-left
+            .panel-heading
+              %h3.panel-title Open Positions
+            .panel-body
+              .form-horizontal
+                %p Add all of the industry skills you currently seek for this project.
+                .form-group
+                  = f.label :skills, 'Open Positions', class: 'col-lg-3 control-label multi'
+                  .col-lg-8
+                    = f.select :skills, [['Producer', 1],['Director', 2],['Writer', 3],['Cinematographer', 4],['Sound Mixer', 5],['Production Coordinator', 6]], { :prompt => ""}, { :class => '', :multiple => true }
+                .form-group
+                  = f.label :start_date, 'Start Date', class: 'col-lg-3 control-label'
+                  .col-lg-3
+                    = f.text_field :start_date, value: Anjlab::Widgets.format_date(f.object.start_date || Time.zone.today), class: 'form-control', 'data-widget' => 'datepicker'
+          %a.btn.btn-outline.btn-large.btn-create2-prev
+            %span.glyphicon.glyphicon-arrow-left
+            Previous
+          %a.btn.btn-outline.btn-large.pull-right.btn-create2-next
+            Next
+            %span.glyphicon.glyphicon-arrow-right
+            
+        .create3-panel.hide
+          .panel.panel-default.signup-animate-left
+            .panel-heading
+              %h3.panel-title Cover Photo
+            .panel-body
+              .form-horizontal
+                %p Round out your project profile with a cover photo and you are done!
+                .form-group
+                  .col-lg-4
+                    = image_tag "picture.png", width: "45", class: "pull-left"
+                  .col-lg-8
+                    .form-group
+                      = f.label :cover_image, 'Cover Photo'
+                      = f.file_field :cover_image
+                      %p.help-block Upload A Compelling photo that will be the cover photo for this project.
+          %a.btn.btn-outline.btn-large.btn-create3-prev
+            %span.glyphicon.glyphicon-arrow-left
+            Previous
+          %a.btn.btn-outline.btn-large.pull-right.btn-create3-next
+            Create Project
+            %span.glyphicon.glyphicon-ok
+
+
+= javascript_include_tag "projects/create_projects", "data-turbolinks-track" => true
+= javascript_include_tag "projects/holder", "data-turbolinks-track" => true
+= javascript_include_tag "projects/select2", "data-turbolinks-track" => true
