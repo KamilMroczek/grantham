@@ -4,8 +4,6 @@ ruby "2.0.0"
 
 gem 'rails', '4.0.1'
 
-gem 'sqlite3'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
@@ -39,6 +37,7 @@ group :development do
 end
 
 group :test, :development do
+  gem 'sqlite3'
   gem 'rspec'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
@@ -53,6 +52,10 @@ group :test, :development do
   gem 'brakeman'
   gem 'rails_best_practices'
 # gem 'debugger', group: [:development, :test]
+end
+
+group :production do
+  gem 'pg'
 end
 
 
