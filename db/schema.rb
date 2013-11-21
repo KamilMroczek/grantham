@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131118044541) do
+ActiveRecord::Schema.define(version: 20131121081925) do
 
   create_table "projects", force: true do |t|
-    t.string   "title",                                null: false
-    t.string   "logline",                  limit: 140, null: false
+    t.string   "title",                                                       null: false
+    t.string   "logline",                  limit: 140,                        null: false
     t.text     "description"
-    t.date     "start_date"
+    t.date     "start_date",              null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cover_image_file_name"
