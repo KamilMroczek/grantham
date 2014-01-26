@@ -11,13 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131121081925) do
+ActiveRecord::Schema.define(version: 20140125192117) do
+
+  create_table "positions", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "project_positions", force: true do |t|
+    t.integer  "project_id",  null: false
+    t.integer  "position_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "projects", force: true do |t|
-    t.string   "title",                                                       null: false
-    t.string   "logline",                  limit: 140,                        null: false
+    t.string   "title",                                null: false
+    t.string   "logline",                  limit: 140, null: false
     t.text     "description"
-    t.date     "start_date",              null: false
+    t.date     "start_date",                           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cover_image_file_name"
@@ -25,5 +38,18 @@ ActiveRecord::Schema.define(version: 20131121081925) do
     t.integer  "cover_image_file_size"
     t.datetime "cover_image_updated_at"
   end
+
+  create_table "signups", force: true do |t|
+    t.string   "email",                                  null: false
+    t.string   "imdb",       limit: 128
+    t.string   "linkedin",   limit: 128
+    t.string   "photo",      limit: 256
+    t.boolean  "approved",               default: false
+    t.boolean  "complete",               default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "signups", ["email"], name: "index_signups_on_email", unique: true
 
 end

@@ -1,0 +1,14 @@
+= stylesheet_link_tag "welcome/splash", media: "all", "data-turbolinks-track" => true
+
+.row
+  .col-md-4
+  .col-md-4
+    .panel
+      .title-container
+        What would you like to do?
+      .first-button.button-container
+        = link_to "Join", new_signup_path, :class => "btn btn-primary btn-lg btn-full-screen"
+      .second-button.button-container
+        = link_to "Submit Project", new_project_path, :class => "btn btn-primary btn-lg btn-full-screen"
+          
+  .col-md-4
