@@ -13,20 +13,13 @@ Grantham::Application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :signups do
-    member do
-      get :new
-      post :create
-    end
-    
     collection do
       get :finish
-      get :index
     end
   end
   resources :projects
   resources :welcome do
     get 'splash', on: :collection
-    get 'finish', on: :collection
   end
   
 
