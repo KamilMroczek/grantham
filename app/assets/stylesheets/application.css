@@ -10,8 +10,8 @@
  *
  *= require_self
  *= require twitter/bootstrap
+ *= require navbar
+ *= require global
  */
- 
-.hide {
-   display: none;
-}
+
+

@@ -1,0 +1,12 @@
+.form-group > input[type=submit] {
+  margin-top: 40px;
+}
+
+.signup-instructions {
+  margin-top: 30px;
+}
+
+#error_explanation {
+  color: red;
+  font-size: 1.3em;
+}

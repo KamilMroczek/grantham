@@ -1,0 +1,21 @@
+= form_for @signup, :html => { :class => 'form-horizontal' } do |f|
+  - if @signup.errors.any?
+    #error_explanation
+      Sorry there was an error submitting
+      %ul
+        - @signup.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.label :email
+    = f.text_field :email, :class => 'form-control', :placeholder => "e.g. stevehill@gmail.com"
+  .form-group
+    = f.label :imdb, "IMDB"
+    = f.text_field :imdb, :class => 'form-control', :placeholder => "e.g. www.imdb.com/name/nm0330687"
+  .form-group.center
+    and/or
+  .form-group
+    = f.label :linkedin, "LinkedIn"
+    = f.text_field :linkedin, :class => 'form-control', :placeholder => "e.g. www.linkedin.com/in/stevehill"
+  .form-group
+    = f.submit 'Apply', :class => 'btn btn-lg btn-primary btn-block'

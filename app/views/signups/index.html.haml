@@ -1,0 +1,25 @@
+%h1 Listing signups
+
+%table
+  %tr
+    %th Email
+    %th Imdb
+    %th Linkedin
+    %th Photo
+    %th
+    %th
+    %th
+
+  - @signups.each do |signup|
+    %tr
+      %td= signup.email
+      %td= signup.imdb
+      %td= signup.linkedin
+      %td= signup.photo
+      %td= link_to 'Show', signup
+      %td= link_to 'Edit', edit_signup_path(signup)
+      %td= link_to 'Destroy', signup, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Signup', new_signup_path
