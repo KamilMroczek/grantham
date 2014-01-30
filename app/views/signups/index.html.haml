@@ -1,5 +1,13 @@
 = stylesheet_link_tag "signup/list", media: "all", "data-turbolinks-track" => true
 
+.row
+  .col-md-2
+  .col-md-8
+    - if flash[:notice]
+      .panel.panel-default.error
+        = flash[:notice]
+  .col-md-2
+  
 .row.signup-list-container
   .col-md-2
   .col-md-8

@@ -19,12 +19,22 @@ describe Signup do
     let (:attrs) { FactoryGirl.attributes_for(:signup) }
     
     it "should require an email" do
-      attrs.merge!(:email => nil)
-      FactoryGirl.build(:signup, attrs).should_not be_valid
+      FactoryGirl.build(:signup, attrs.merge(:email => nil)).should_not be_valid
     end
     it "should NOT accept a blank email" do
-      attrs.merge!(:email => "  ")
-      FactoryGirl.build(:signup, attrs).should_not be_valid
+      FactoryGirl.build(:signup, attrs.merge(:email => "  ")).should_not be_valid
+    end
+    
+    context "when a signup from the same user exists already" do
+      before do
+        FactoryGirl.create(:signup, :email => "same@email.com")
+      end
+      it "should NOT allow creation of a signup with the same email" do
+        FactoryGirl.build(:signup, attrs.merge(:email => "same@email.com")).should_not be_valid
+      end
+      it "should allow creation of a signup with a different email" do
+        FactoryGirl.build(:signup, attrs.merge(:email => "diff@email.com")).should be_valid
+      end
     end
     
     context "when has only an IMDB link" do
