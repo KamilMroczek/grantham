@@ -4,9 +4,7 @@ FactoryGirl.define do
   factory :signup do
     sequence(:email) { |n| "user#{n}@gmail.com" }
     sequence(:imdb) { |n| "http://www.imdb.com/name/#{n}" }
-    linkedin nil
-    photo nil
+    website nil
     approved false
-    complete false
   end
 end

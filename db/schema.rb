@@ -40,12 +40,10 @@ ActiveRecord::Schema.define(version: 20140125192117) do
   end
 
   create_table "signups", force: true do |t|
-    t.string   "email",                                  null: false
-    t.string   "imdb",       limit: 128
-    t.string   "linkedin",   limit: 128
-    t.string   "photo",      limit: 256
+    t.string   "email",      limit: 256,                 null: false
+    t.string   "imdb",       limit: 256
+    t.string   "website",    limit: 256
     t.boolean  "approved",               default: false
-    t.boolean  "complete",               default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

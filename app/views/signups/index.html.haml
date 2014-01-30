@@ -1,25 +1,21 @@
-%h1 Listing signups
+= stylesheet_link_tag "signup/list", media: "all", "data-turbolinks-track" => true
 
-%table
-  %tr
-    %th Email
-    %th Imdb
-    %th Linkedin
-    %th Photo
-    %th
-    %th
-    %th
+.row.signup-list-container
+  .col-md-2
+  .col-md-8
+    %h1 Listing Signups
 
-  - @signups.each do |signup|
-    %tr
-      %td= signup.email
-      %td= signup.imdb
-      %td= signup.linkedin
-      %td= signup.photo
-      %td= link_to 'Show', signup
-      %td= link_to 'Edit', edit_signup_path(signup)
-      %td= link_to 'Destroy', signup, :method => :delete, :data => { :confirm => 'Are you sure?' }
+    %table{:class => 'table table-bordered'}
+      %tr
+        %th Email
+        %th Imdb
+        %th Website
+        %th
 
-%br
-
-= link_to 'New Signup', new_signup_path
+      - @signups.each do |signup|
+        %tr
+          %td= signup.email
+          %td= link_to signup.imdb, signup.imdb, :target => '_blank'
+          %td= link_to signup.website, signup.website, :target => '_blank'
+          %td= link_to 'Approve', approve_signup_path(signup)
+  .col-md-2
