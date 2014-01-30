@@ -1,19 +1,23 @@
 class SignupsController < ApplicationController
-  # GET /signups
-  # GET /signups.json
+  
+  before_filter :set_signup, :only => [:approve]
+
   def index
-    @signups = Signup.all
+    @signups = Signup.where(:approved => false)
   end
 
-  # GET /signups/new
   def new
     @signup = Signup.new
   end
   
   def finish
   end
+  
+  def approve
+    #TO DO create user record
+    @signup.update_attributes!(:approved => true)
+  end
 
-  # POST /signups
   def create
     @signup = Signup.new(signup_params)
 
@@ -33,6 +37,6 @@ class SignupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def signup_params
-      params.require(:signup).permit(:email, :imdb, :linkedin, :photo)
+      params.require(:signup).permit(:email, :imdb, :website, :photo)
     end
 end

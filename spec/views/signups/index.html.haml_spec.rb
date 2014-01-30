@@ -6,14 +6,12 @@ describe "signups/index" do
       stub_model(Signup,
         :email => "Email",
         :imdb => "Imdb",
-        :linkedin => "Linkedin",
-        :photo => "Photo"
+        :website => "website"
       ),
       stub_model(Signup,
         :email => "Email",
         :imdb => "Imdb",
-        :linkedin => "Linkedin",
-        :photo => "Photo"
+        :website => "website"
       )
     ])
   end
@@ -23,7 +21,6 @@ describe "signups/index" do
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "tr>td", :text => "Email".to_s, :count => 2
     assert_select "tr>td", :text => "Imdb".to_s, :count => 2
-    assert_select "tr>td", :text => "Linkedin".to_s, :count => 2
-    assert_select "tr>td", :text => "Photo".to_s, :count => 2
+    assert_select "tr>td", :text => "website".to_s, :count => 2
   end
 end

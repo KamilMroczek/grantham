@@ -3,12 +3,10 @@
 # Table name: signups
 #
 #  id         :integer          not null, primary key
-#  email      :string(255)      not null
-#  imdb       :string(128)
-#  linkedin   :string(128)
-#  photo      :string(256)
+#  email      :string(256)      not null
+#  imdb       :string(256)
+#  website    :string(256)
 #  approved   :boolean          default(FALSE)
-#  complete   :boolean          default(FALSE)
 #  created_at :datetime
 #  updated_at :datetime
 #
@@ -20,6 +18,7 @@ class Signup < ActiveRecord::Base
   validates_uniqueness_of :email
 
   private
+  
   def validate_email
     self.email.try(:strip!)
     self.email.try(:downcase!)
@@ -32,23 +31,20 @@ class Signup < ActiveRecord::Base
   end
   
   def validate_links
-    self.linkedin.try(:strip!)
+    self.website.try(:strip!)
     self.imdb.try(:strip!)
     
-    if self.linkedin.blank? && self.imdb.blank?
-      errors.add(:base, "Specify an IMDB or LinkedIn link so we know who you are!")
+    if self.website.blank? && self.imdb.blank?
+      errors.add(:base, "Specify a website or IMDB link so we know who you are!")
     end
     
-    validate_linkedin
+    validate_website
     validate_imdb
   end
   
-  def validate_linkedin
-    if self.linkedin.present?
-      self.linkedin = cleanup_url(self.linkedin)
-      unless self.linkedin =~ /http:\/\/www\.linkedin/
-        errors.add(:base, "LinkedIn links should be of the form http://www.linkedin.com")
-      end
+  def validate_website
+    if self.website.present?
+      self.website = cleanup_url(self.website)
     end
   end
   

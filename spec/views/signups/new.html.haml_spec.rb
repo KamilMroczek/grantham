@@ -5,8 +5,7 @@ describe "signups/new" do
     assign(:signup, stub_model(Signup,
       :email => "MyString",
       :imdb => "MyString",
-      :linkedin => "MyString",
-      :photo => "MyString"
+      :website => "MyString"
     ).as_new_record)
   end
 
@@ -17,7 +16,7 @@ describe "signups/new" do
     assert_select "form[action=?][method=?]", signups_path, "post" do
       assert_select "input#signup_email[name=?]", "signup[email]"
       assert_select "input#signup_imdb[name=?]", "signup[imdb]"
-      assert_select "input#signup_linkedin[name=?]", "signup[linkedin]"
+      assert_select "input#signup_website[name=?]", "signup[website]"
     end
   end
 end

@@ -16,6 +16,10 @@ Grantham::Application.routes.draw do
     collection do
       get :finish
     end
+    
+    member do
+      get :approve
+    end
   end
   resources :projects
   resources :welcome do
