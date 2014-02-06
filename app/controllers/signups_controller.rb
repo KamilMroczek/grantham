@@ -14,8 +14,14 @@ class SignupsController < ApplicationController
   end
   
   def approve
-    #TO DO create user record
-    @signup.update_attributes!(:approved => true)
+    new_user = UserCreator.new.create_user(@signup)
+    if new_user.errors.count.zero?
+      @signup.update_attributes!(:approved => true)
+      flash[:notice] = "New user added #{new_user.email}"
+    else
+      flash[:notice] = "Errors adding user #{@signup.email}. #{new_user.errors.full_messages}"
+    end
+    redirect_to :action => 'index'
   end
 
   def create

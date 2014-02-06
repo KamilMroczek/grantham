@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140125192117) do
+ActiveRecord::Schema.define(version: 20140130061848) do
 
   create_table "positions", force: true do |t|
     t.string   "name",       null: false
@@ -49,5 +49,15 @@ ActiveRecord::Schema.define(version: 20140125192117) do
   end
 
   add_index "signups", ["email"], name: "index_signups_on_email", unique: true
+
+  create_table "users", force: true do |t|
+    t.string   "email",      limit: 256, null: false
+    t.string   "imdb",       limit: 256
+    t.string   "website",    limit: 256
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end

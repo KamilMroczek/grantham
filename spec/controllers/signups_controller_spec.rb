@@ -67,4 +67,47 @@ describe SignupsController do
       end
     end
   end
+  
+  describe "GET approve" do
+    describe "with valid signup" do
+      let(:signup) { FactoryGirl.create :signup, :approved => false }
+      it "creates a new User" do
+        expect {
+          get :approve, :id => signup.id
+        }.to change(User, :count).by(1)
+      end
+      it "approves the signup" do
+        get :approve, :id => signup.id
+        signup.reload.should be_approved
+      end
+      it "sets the flash notice to" do
+        get :approve, :id => signup.id
+        flash[:notice].should =~ /new user added/i
+      end
+    end
+    
+    describe "with invalid signup" do
+      let(:signup) { FactoryGirl.create :signup, :approved => false }
+      before do
+        errors = ["error1"]
+        errors.stub(:full_messages).and_return("errors")
+        mock_user = double(User)
+        mock_user.stub(:errors).and_return(errors)
+        UserCreator.any_instance.stub(:create_user).and_return(mock_user)
+      end
+      it "should not create a new user" do
+        expect {
+          get :approve, :id => signup.id
+        }.not_to change(User, :count)
+      end
+      it "doesn't approve the signup" do
+        get :approve, :id => signup.id
+        signup.reload.should_not be_approved
+      end
+      it "sets the flash notice to" do
+        get :approve, :id => signup.id
+        flash[:notice].should =~ /errors adding/i
+      end
+    end
+  end
 end
