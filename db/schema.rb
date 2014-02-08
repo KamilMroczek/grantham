@@ -27,16 +27,12 @@ ActiveRecord::Schema.define(version: 20140130061848) do
   end
 
   create_table "projects", force: true do |t|
-    t.string   "title",                                null: false
-    t.string   "logline",                  limit: 140, null: false
-    t.text     "description"
-    t.date     "start_date",                           null: false
+    t.string   "title",      limit: 50,                  null: false
+    t.string   "logline",    limit: 300,                 null: false
+    t.date     "start_date",                             null: false
+    t.boolean  "approved",               default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "cover_image_file_name"
-    t.string   "cover_image_content_type"
-    t.integer  "cover_image_file_size"
-    t.datetime "cover_image_updated_at"
   end
 
   create_table "signups", force: true do |t|
