@@ -12,16 +12,17 @@ Grantham::Application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  resources :signups do
-    collection do
-      get :finish
-    end
-    
+  resources :signups, only: [:new, :create, :index] do
     member do
       get :approve
     end
   end
-  resources :projects
+  resources :projects, only: [:new, :create, :index] do
+    member do
+      get :approve
+    end
+  end
+  
   resources :welcome do
     get 'splash', on: :collection
   end

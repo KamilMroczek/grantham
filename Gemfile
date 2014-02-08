@@ -16,8 +16,8 @@ gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
                               :github => 'anjlab/bootstrap-rails'
 gem 'anjlab-widgets'
 
-gem 'paperclip'
-gem 'aws-sdk'
+# gem 'paperclip'
+# gem 'aws-sdk'
 
 gem 'haml'
 gem 'haml-rails'

@@ -23,13 +23,6 @@ describe SignupsController do
       assigns(:signup).should be_a_new(Signup)
     end
   end
-  
-  describe "GET finish" do
-    it "should succeed" do
-      get 'finish'
-      response.should be_success
-    end
-  end
     
   describe "POST create" do
     describe "with valid params" do

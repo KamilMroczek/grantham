@@ -1,6 +1,4 @@
 class SignupsController < ApplicationController
-  
-  before_filter :set_signup, :only => [:approve]
 
   def index
     @signups = Signup.where(:approved => false)
@@ -10,10 +8,8 @@ class SignupsController < ApplicationController
     @signup = Signup.new
   end
   
-  def finish
-  end
-  
   def approve
+    set_signup
     new_user = UserCreator.new.create_user(@signup)
     if new_user.errors.count.zero?
       @signup.update_attributes!(:approved => true)
@@ -36,12 +32,10 @@ class SignupsController < ApplicationController
   end
   
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_signup
       @signup = Signup.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def signup_params
       params.require(:signup).permit(:email, :imdb, :website, :photo)
     end

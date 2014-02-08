@@ -1,0 +1,29 @@
+= stylesheet_link_tag "signup/list", media: "all", "data-turbolinks-track" => true
+
+.row
+  .col-md-2
+  .col-md-8
+    - if flash[:notice]
+      .panel.panel-default.error
+        = flash[:notice]
+  .col-md-2
+  
+.row.signup-list-container
+  .col-md-2
+  .col-md-8
+    %h1 Listing Potential Projects
+
+    %table{:class => 'table table-bordered'}
+      %tr
+        %th Title
+        %th Log Line
+        %th Start Date
+        %th
+
+      - @projects.each do |project|
+        %tr
+          %td= project.title
+          %td= project.logline
+          %td= project.start_date
+          %td= link_to 'Approve', approve_project_path(project)
+  .col-md-2
