@@ -11,20 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130061848) do
-
-  create_table "positions", force: true do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "project_positions", force: true do |t|
-    t.integer  "project_id",  null: false
-    t.integer  "position_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20140303003510) do
 
   create_table "projects", force: true do |t|
     t.string   "title",      limit: 50,                  null: false
@@ -45,6 +32,22 @@ ActiveRecord::Schema.define(version: 20140130061848) do
   end
 
   add_index "signups", ["email"], name: "index_signups_on_email", unique: true
+
+  create_table "skills", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_skills", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "skill_id",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_skills", ["skill_id"], name: "index_user_skills_on_skill_id"
+  add_index "user_skills", ["user_id"], name: "index_user_skills_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",      limit: 256, null: false

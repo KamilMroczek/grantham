@@ -61,20 +61,30 @@ describe SignupsController do
     end
   end
   
-  describe "GET approve" do
+  describe "GET edit" do
+    let(:signup) { FactoryGirl.create :signup, :approved => false }
+    
+    it "assigns a new signup as @signup" do
+      get :edit, :id => signup.id
+      assigns(:signup).should eq(signup)
+    end
+  end
+  
+  describe "POST update" do
     describe "with valid signup" do
       let(:signup) { FactoryGirl.create :signup, :approved => false }
       it "creates a new User" do
-        expect {
-          get :approve, :id => signup.id
-        }.to change(User, :count).by(1)
+        params = { :id => signup.id, 'signup' => { :skills => ['1','2'] } }
+        expect { put :update, params }.to change(User, :count).by(1)
       end
       it "approves the signup" do
-        get :approve, :id => signup.id
+        params = { :id => signup.id, 'signup' => { :skills => ['1','2'] } }
+        put :update, params
         signup.reload.should be_approved
       end
       it "sets the flash notice to" do
-        get :approve, :id => signup.id
+        params = { :id => signup.id, 'signup' => { :skills => ['1','2'] } }
+        put :update, params
         flash[:notice].should =~ /new user added/i
       end
     end
@@ -89,16 +99,14 @@ describe SignupsController do
         UserCreator.any_instance.stub(:create_user).and_return(mock_user)
       end
       it "should not create a new user" do
-        expect {
-          get :approve, :id => signup.id
-        }.not_to change(User, :count)
+        expect { put :update, :id => signup.id }.not_to change(User, :count)
       end
       it "doesn't approve the signup" do
-        get :approve, :id => signup.id
+        put :update, :id => signup.id
         signup.reload.should_not be_approved
       end
       it "sets the flash notice to" do
-        get :approve, :id => signup.id
+        put :update, :id => signup.id
         flash[:notice].should =~ /errors adding/i
       end
     end
