@@ -26,7 +26,7 @@ class ProjectsController < ApplicationController
     else
       flash[:notice] = "Unable to approve project #{@project.title}."
     end
-    redirect_to :action => :index
+    redirect_to :action => :index, :projects => Project.unapproved
   end
   
   private

@@ -16,6 +16,14 @@ class Signup < ActiveRecord::Base
   validate :validate_email
   validate :validate_links
   validates_uniqueness_of :email
+  
+  def skills
+    @skills
+  end
+  
+  def skills=(value)
+    @skills = value
+  end
 
   private
   

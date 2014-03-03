@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe ProjectsController do
+  render_views
+  
   describe "GET new" do
     it "succeeds" do
       get :new

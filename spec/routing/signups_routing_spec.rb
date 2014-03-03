@@ -14,8 +14,12 @@ describe SignupsController do
       post("/signups").should route_to("signups#create")
     end
     
-    it "routes to #approve" do
-      get("/signups/1/approve").should route_to({ "action"=>"approve", "controller"=>"signups", "id"=>"1" })
+    it "routes to #edit" do
+      get("/signups/1/edit").should route_to({ "action"=>"edit", "controller"=>"signups", "id"=>"1" })
+    end
+    
+    it "routes to #update" do
+      put("/signups/1").should route_to({ "action"=>"update", "controller"=>"signups", "id"=>"1" })
     end
   end
 end
