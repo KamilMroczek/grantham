@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   validate :has_link?
   
-  has_many :skill, :through => :user_skill
+  has_many :skills, :through => :user_skill
   has_many :user_skill
   
   private

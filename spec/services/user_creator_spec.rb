@@ -11,6 +11,10 @@ describe UserCreator do
     it "creates a single user" do
       expect { subject.create_user(signup, []) }.to change(User, :count).by(1)
     end
+    it "saves the user to the database" do
+      user = subject.create_user(signup, [])
+      user.should be_persisted
+    end
     it "creates a user with the same email" do
       user = subject.create_user(signup, [])
       user.email.should == "email@email.com"
@@ -39,8 +43,18 @@ describe UserCreator do
     end
     
     describe "associating skills" do
-      it "should create a skill association for each skill" do
-        expect { subject.create_user(signup, ['1', '2']) }.to change(UserSkill, :count).by 2
+      before do
+        @skill1 = FactoryGirl.create(:skill, :name => "Skill1")
+        @skill2 = FactoryGirl.create(:skill, :name => "Skill2")
+        @skills = [@skill1.id.to_s, @skill2.id.to_s]
+      end
+      it "creates a skill association for each skill" do
+        expect { subject.create_user(signup, @skills) }.to change(UserSkill, :count).by 2
+      end
+      it "creates the proper details for the association" do
+        subject.create_user(signup, @skills)
+        user = User.last
+        user.skills.should =~ [@skill1, @skill2]
       end
     end
   end

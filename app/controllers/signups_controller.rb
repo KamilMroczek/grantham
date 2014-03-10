@@ -26,12 +26,12 @@ class SignupsController < ApplicationController
   def update
     set_signup
     skills = params['signup'].try(:[], 'skills')
+    skills.select!(&:present?) unless skills.nil?
     if skills.nil? || skills.count < 1
       flash[:notice] = "Errors adding user #{@signup.email}. Please select a skill."
     else
       new_user = UserCreator.new.create_user(@signup, skills)
       if new_user.errors.count.zero?
-        ap "here!"
         @signup.update_attributes!(:approved => true)
         flash[:notice] = "New user added #{new_user.email}"
       else
