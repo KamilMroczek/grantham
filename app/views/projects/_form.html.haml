@@ -1,0 +1,32 @@
+= form_for @project, :html => { :class => 'form-horizontal', :multipart => true }, :url => projects_path do |f|
+  .panel.panel-default.signup-animate-left
+    .panel-heading
+      %h3.panel-title Create Project
+    .panel-body
+      .form-horizontal
+        %p Tell us a bit about the project to get you started.    
+        .form-group
+          = f.label :title, 'Project Title', class: 'col-lg-3 control-label'
+          .col-lg-8
+            = f.text_field :title, class: 'form-control', placeholder: "What shall we call this project?", maxlength: 50
+        .form-group
+          = f.label :logline, 'Log Line', class: 'col-lg-3 control-label'
+          .col-lg-8
+            = f.text_area :logline, class: 'form-control', placeholder: 'capture us in 300 characters or less...', rows: 3, maxlength: 300
+        .form-group
+          = f.label :start_date, 'Start Date', class: 'col-lg-3 control-label'
+          .col-lg-3
+            = f.text_field :start_date, value: Anjlab::Widgets.format_date(f.object.start_date || Time.zone.today), class: 'form-control', 'data-widget' => 'datepicker'        
+        .form-group.project-skills
+          - @skills.in_groups_of(2).each do |skill_group|
+            .row
+              - skill_group.each do |skill|
+                .col-lg-6.project-skill-box
+                  - if skill.present?
+                    %label{ :for => "#{skill.name}_lbl" }
+                      = check_box_tag 'project[jobs_attributes][]', skill.id, false, :id => "#{skill.name}_lbl"
+                      = skill.name
+        .form-group
+          %a{:id => 'new_project_submit', :class => 'btn btn-outline btn-large pull-right' }
+            Create Project
+            %span.glyphicon.glyphicon-ok

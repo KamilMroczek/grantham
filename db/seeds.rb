@@ -34,7 +34,6 @@ Skill.create!(:name => 'Sound Mixer')
 Skill.create!(:name => 'Boom Operator')
 
 Skill.create!(:name => 'Editor')
-Skill.create!(:name => 'Colorist')
 Skill.create!(:name => 'Visual effects')
 Skill.create!(:name => 'Colorist')
 Skill.create!(:name => 'Sound Designer')
