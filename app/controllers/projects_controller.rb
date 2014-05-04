@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
     if @project.update_attributes(:approved => true)
       flash[:notice] = "Approved project #{@project.title}."
     else
-      flash[:notice] = "Unable to approve project #{@project.title}."
+      flash[:notice] = "Unable to approve project #{@project.title}. #{@project.errors.full_messages.first}"
     end
     redirect_to :action => :index
   end
