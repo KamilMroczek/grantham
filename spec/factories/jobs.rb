@@ -1,7 +1,8 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :skill do
-    sequence(:name) { |n| "Skill#{n}" }
+  factory :job do
+    project_id 1
+    skill_id 1
   end
 end

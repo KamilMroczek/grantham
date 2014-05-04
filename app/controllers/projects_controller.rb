@@ -1,20 +1,21 @@
 class ProjectsController < ApplicationController
-  
+
   def index
     @projects = Project.unapproved
   end
   
   def new
     @project = Project.new
+    @skills = Skill.all
   end
   
   def create
-    convert_date
-    @project = Project.new(project_params)
-    if @project.save
+    @project, saved = ProjectHelper.create(project_params)
+    if saved
       flash[:notice] = "Added project #{@project.title}."
       redirect_to projects_path
     else
+      @skills = Skill.all
       render :action => :new
     end
   end
@@ -26,17 +27,11 @@ class ProjectsController < ApplicationController
     else
       flash[:notice] = "Unable to approve project #{@project.title}."
     end
-    redirect_to :action => :index, :projects => Project.unapproved
+    redirect_to :action => :index
   end
   
-  private
-  def convert_date
-    project_params["start_date"] = Date.strptime(project_params["start_date"], "%m/%d/%Y")
-  rescue
-    project_params["start_date"] = nil
-  end
-  
+  private  
   def project_params
-    @project_params ||= params.require(:project).permit(:title, :logline, :start_date)
+    @project_params ||= params.require(:project).permit( :title, :logline, :start_date, :jobs_attributes => [])
   end
 end
